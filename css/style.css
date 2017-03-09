@@ -1,0 +1,68 @@
+/* -------------------- header page --------------------*/
+#header h1, .row img, .row #title {
+    margin-left: 300px;
+}
+
+#header {
+    position: relative;
+    width: 100%;
+    height: 100px;
+
+}
+
+#header h1 {
+    position: absolute;
+    top: 0;
+}
+
+#buttons {
+    position: absolute;
+    right: 5%;
+    top: 25%;
+
+}
+
+#buttons #navBtn {
+    margin-right: 40px;
+}
+
+/* -------------------- index page -----------------*/
+.row {
+    clear: both;
+    /*border: 3px solid black;*/
+}
+
+.row img, .row #title {
+    float: left;
+}
+
+.row p {
+    margin-left: 500px;
+    width: 800px;
+    position: relative;
+
+}
+
+.row #date{
+    margin-left: 500px;
+    position: absolute;
+}
+
+/* -------------------- submit page --------------------*/
+#submitContainer {
+    width: 500px;
+    margin: 50px 0px 0px 300px;
+    /*clear: both;*/
+}
+
+#submitContainer #submitButton {
+    width: 100px;
+    margin-top: 20px;
+}
+
+#submitContainer input {
+    width: 100%;
+    margin-bottom: 20px;
+    /*clear: both;*/
+}
+

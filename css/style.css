@@ -1,6 +1,6 @@
 /* -------------------- header page --------------------*/
 #header h1, .row img, .row #title {
-    margin-left: 300px;
+    margin-left: 10%;
 }
 
 #header {
@@ -26,6 +26,40 @@
     margin-right: 40px;
 }
 
+/* The Modal (background) */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    padding-top: 100px; /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content */
+.modal-content {
+    background-color: #fefefe;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+}
+
+.inputBox {
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.submitButton {
+    width: 100px;
+    margin-top: 20px;
+}
+
 /* -------------------- index page -----------------*/
 .row {
     clear: both;
@@ -37,32 +71,21 @@
 }
 
 .row p {
-    margin-left: 500px;
-    width: 800px;
+    margin-left: 30%;
+    width: 50%;
     position: relative;
 
 }
 
 .row #date{
-    margin-left: 500px;
+    margin-left: 30%;
     position: absolute;
 }
 
 /* -------------------- submit page --------------------*/
 #submitContainer {
     width: 500px;
-    margin: 50px 0px 0px 300px;
-    /*clear: both;*/
-}
-
-#submitContainer #submitButton {
-    width: 100px;
-    margin-top: 20px;
-}
-
-#submitContainer input {
-    width: 100%;
-    margin-bottom: 20px;
+    margin: 50px 0px 0px 10%;
     /*clear: both;*/
 }
 

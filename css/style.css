@@ -26,6 +26,10 @@
     margin-right: 40px;
 }
 
+#logoutBtn {
+    margin-right: 10px; 
+}
+
 /* The Modal (background) */
 .modal {
     display: none; /* Hidden by default */
@@ -45,13 +49,19 @@
 .modal-content {
     background-color: #fefefe;
     margin: auto;
-    padding: 20px;
+    /*padding: 20px;*/
+    padding-left: 5%;
     border: 1px solid #888;
-    width: 80%;
+    width: 30%;
 }
 
 .inputBox {
     width: 100%;
+    margin-bottom: 20px;
+}
+
+.inputBoxModal {
+    width: 45%;
     margin-bottom: 20px;
 }
 

@@ -8,22 +8,11 @@
     you'll only need to update it here.
 */
  
-$config = array(
-    "db" => array(
-        "db1" => array(
-            "dbname" => "database1",
-            "username" => "dbUser",
-            "password" => "pa$$",
-            "host" => "localhost"
-        ),
-        "db2" => array(
-            "dbname" => "database2",
-            "username" => "dbUser",
-            "password" => "pa$$",
-            "host" => "localhost"
-        )
-    )
-);
+/* Database information */
+define('DB_SERVER', 'TODO');
+define('DB_USERNAME', 'TODO');
+define('DB_PASSWORD', 'TODO');
+define('DB_DATABASE', 'TODO');
  
 /*
     I will usually place the following in a bootstrap file or some type of environment

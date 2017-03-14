@@ -9,10 +9,10 @@
 */
  
 /* Database information */
-define('DB_SERVER', 'TODO');
-define('DB_USERNAME', 'TODO');
-define('DB_PASSWORD', 'TODO');
-define('DB_DATABASE', 'TODO');
+define('DB_SERVER', 'endpoint');
+define('DB_USERNAME', 'username');
+define('DB_PASSWORD', 'password');
+define('DB_DATABASE', 'name');
  
 /*
     I will usually place the following in a bootstrap file or some type of environment

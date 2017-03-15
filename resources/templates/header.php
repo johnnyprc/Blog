@@ -12,7 +12,8 @@
 
                 if(isset($_SESSION['username'])) {
                     echo '<a id="logoutBtn" href="api/authUser.php?logout=true">Logout</a>';
-                    echo '<span>Welcome ' . $_SESSION['username'] . '</span>';
+                    echo '<span>Welcome ' .
+                        htmlspecialchars($_SESSION['username'], ENT_QUOTES) . '</span>';
                 }
                 else {
                     echo '<button id="loginBtn">Login</button>';
@@ -37,7 +38,8 @@
                     <h3>Login to Blog to submit post</h3>
                     <?php 
                         if(isset($_SESSION['err'])) {
-                            echo '<p><font color="red">' . $_SESSION['err'] . '</font></p>';
+                            echo '<p><font color="red">' .
+                                htmlspecialchars($_SESSION['err'], ENT_QUOTES) . '</font></p>';
                             unset($_SESSION['err']);
                         }
                     ?>
@@ -46,8 +48,8 @@
                     <input class="submitButton" type="submit" name="login" value="Login">
                 </form>
             </div>
-            
-        </div>  
+
+        </div>
     </div>
 </div>
 <hr>

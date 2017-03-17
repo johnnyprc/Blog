@@ -20,7 +20,7 @@
     <form id="postForm">
         Title:<input class="inputBox" type="text" name="inputTitle">
         Image URL:<input class="inputBox" type="text" name="imageURL">
-        Post: <textarea name="postText" rows="20" cols="120"></textarea>
+        Text: <textarea name="postText" rows="20" cols="120"></textarea>
         <input class="submitButton" type="submit" value="Submit">
     </form>
 </div>
@@ -46,14 +46,20 @@ $('#postForm').submit(function(event) {
     });
 
     request.done(function (response, textStatus, jqXHR){
-        alert(response);
+        if (response.formInvalid) {
+            // TODO: test url valid or not
+            console.log(response.titleErr);
+            console.log(response.urlErr);
+            console.log(response.textErr);
+        } else {
+            alert(response.message);
+        }
     });
 
     request.fail(function (jqXHR, textStatus, errorThrown){
         // Log the error to the console
         console.error(
-            "The following error occurred: " +
-            textStatus, errorThrown
+            "textStatus: " + textStatus + ", errorThrown: " + errorThrown
         );
     });
 });

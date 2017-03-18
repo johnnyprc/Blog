@@ -55,11 +55,6 @@
     width: 30%;
 }
 
-.inputBox {
-    width: 100%;
-    margin-bottom: 20px;
-}
-
 .inputBoxModal {
     width: 45%;
     margin-bottom: 20px;
@@ -94,8 +89,21 @@
 
 /* -------------------- submit page --------------------*/
 #submitContainer {
-    width: 500px;
+    width: 800px;
     margin: 50px 0px 0px 10%;
     /*clear: both;*/
 }
 
+#postForm {
+    margin-top: 15px;
+}
+
+.inputLabel {
+    display: block;
+}
+
+.inputBox {
+    width: 50%;
+    margin-bottom: 20px;
+    margin-right: 5px;
+}

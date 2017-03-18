@@ -1,4 +1,3 @@
 resources/config.php
-api/createTable.sql
-api/createPostTable.sql
+api/queries/
 api/ChromePhp.php

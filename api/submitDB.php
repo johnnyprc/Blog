@@ -1,5 +1,6 @@
 <?php
     require '../resources/config.php';
+    include 'ChromePhp.php';
 
     // valid input before inserting into database
     validateForm($_POST['inputTitle'], $_POST['imageURL'], $_POST['postText']);
@@ -7,38 +8,32 @@
     $title = mysqli_real_escape_string($connection, $_POST['inputTitle']);
     $url = mysqli_real_escape_string($connection, $_POST['imageURL']);
     $text = mysqli_real_escape_string($connection, $_POST['postText']);
-    addPost($connection, $title, $url, $text);
+    // addPost($connection, $title, $url, $text);
 
-    // Validate if all inputs are not empty and URL is valid
+    // Validate that all inputs are not empty and image URL is valid
     function validateForm($title, $url, $text) {
         $titleErr = $urlErr = $textErr = "";
         if (empty($title)) {
-            $titleErr = "Title is required";
+            $titleErr = "A title is required";
         }
 
         if (empty($url)) {
-            $urlErr = "Image URL is required";
+            $urlErr = "An image URL is required";
         } else {
-            // adding 'http://' when not explicitly stated by user
-            if ($parts = parse_url($url)) {
-               if (!isset($parts["scheme"]))
-               {
-                   $url = "http://$url";
-               }
-            }
-            // checking for valid URL
-            if (filter_var($url, FILTER_VALIDATE_URL) == FALSE) {
-                $urlErr = "URL is invalid";
+            // checking for valid image URL, ignore warning so that 
+            // it wouldn't mess up json response
+            if (!@getimagesize($url)) {
+                $urlErr = "Image URL is invalid";
             }
         }
 
         if (empty($text)) {
-            $textErr = "Text is required";
+            $textErr = "required";
         }
 
         // If there are any invalid input return immediately
         if (!empty($titleErr) || !empty($urlErr) || !empty($textErr)) {
-            header('Content-Type: application/json');    
+            header('Content-Type: application/json');
             die(json_encode(array(
                 'formInvalid' => True,
                 'titleErr' => $titleErr,

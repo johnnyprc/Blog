@@ -16,17 +16,17 @@
     }
 ?>
 <div id="submitContainer">
-    <h2>Submit a post</h2>
+    <h2>Submit a post</h2><font color="red">All inputs are required</font>
     <form id="postForm">
-        Title:<input class="inputBox" type="text" name="inputTitle">
-        Image URL:<input class="inputBox" type="text" name="imageURL">
-        Text: <textarea name="postText" rows="20" cols="120"></textarea>
+        <label class="inputLabel">Title:</label>
+            <input class="inputBox" type="text" name="inputTitle"><label id="titleErr"></label>
+        <label class="inputLabel">Image URL:</label>
+            <input class="inputBox" type="text" name="imageURL"><label id="urlErr"></label>
+        <label class="inputLabel" id="textErr">Text:</label>
+            <textarea name="postText" rows="20" cols="120"></textarea>
         <input class="submitButton" type="submit" value="Submit">
     </form>
 </div>
-
-<!-- result of submitting a post -->
-<div id="result"></div>
 
 <script>
 // sending form data to database
@@ -47,10 +47,10 @@ $('#postForm').submit(function(event) {
 
     request.done(function (response, textStatus, jqXHR){
         if (response.formInvalid) {
-            // TODO: test url valid or not
-            console.log(response.titleErr);
-            console.log(response.urlErr);
-            console.log(response.textErr);
+            // Fill corresponding label with error message, if any
+            $("#titleErr").html("<font color='red'>" + response.titleErr + "<font>");
+            $("#urlErr").html("<font color='red'>" + response.urlErr + "<font>");
+            $("#textErr").html("Text: <font color='red'>" + response.textErr + "<font>");
         } else {
             alert(response.message);
         }

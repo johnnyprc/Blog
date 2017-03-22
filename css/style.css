@@ -1,5 +1,5 @@
 /* -------------------- header page --------------------*/
-#header h1, .row img, .row #title {
+#header h1, .row img, .row .title {
     margin-left: 10%;
 }
 
@@ -71,7 +71,7 @@
     /*border: 3px solid black;*/
 }
 
-.row img, .row #title {
+.row img, .row .title {
     float: left;
 }
 
@@ -82,7 +82,7 @@
 
 }
 
-.row #date{
+.row .date{
     margin-left: 30%;
     position: absolute;
 }

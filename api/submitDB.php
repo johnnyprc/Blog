@@ -1,19 +1,25 @@
 <?php
     require '../resources/config.php';
+    include '../resources/ChromePhp.php';
 
     header('Content-Type: application/json');
 
-    // valid input before inserting into database
-    validateForm($_POST['inputTitle'], $_POST['imageURL'], $_POST['postText']);
+    // validate input and get image width and height before inserting
+    // into database
+    $imgSize = processInput(
+        $_POST['inputTitle'], $_POST['imageURL'], $_POST['postText']
+    );
 
     $title = mysqli_real_escape_string($connection, $_POST['inputTitle']);
     $url = mysqli_real_escape_string($connection, $_POST['imageURL']);
     $text = mysqli_real_escape_string($connection, $_POST['postText']);
-    addPost($connection, $title, $url, $text);
+    addPost($connection, $title, $url, $text, $imgSize);
 
     // Validate that all inputs are not empty and image URL is valid
-    function validateForm($title, $url, $text) {
+    function processInput($title, $url, $text) {
         $titleErr = $urlErr = $textErr = "";
+        $newImgSize;
+
         if (empty($title)) {
             $titleErr = "A title is required";
         }
@@ -23,8 +29,13 @@
         } else {
             // checking for valid image URL, ignore warning so that 
             // it wouldn't mess up json response
-            if (!@getimagesize($url)) {
+            if (!$size = @getimagesize($url)) {
                 $urlErr = "Image URL is invalid";
+            } else {
+                // resize image so that width and height is under limit, 
+                // if necessary
+                $newImgSize = resizeImage($size[0], $size[1]);
+                // ChromePhp::log($newImgSize[0] . " / " . $newImgSize[1]);
             }
         }
 
@@ -41,12 +52,42 @@
                 'textErr' => $textErr
             )));
         }
+
+        return $newImgSize;
     }
 
-    function addPost($connection, $title, $url, $text) {
+    // scale down the image if necessary, and make sure the width and height
+    // is under the limit while maintaining its original width and height ratio
+    function resizeImage($width, $height) {
+        $widthLimit = 120;
+        $heightLimit = 300;
+        $ratioLimit = $widthLimit / $heightLimit;
+        // no need to resize image if width and height are under limit
+        if ($width < $widthLimit && $height < $heightLimit) {
+            return array ($width, $height);
+        }
+        // If the width/height ratio is higher than the ratio limit,
+        // adjust the width to width limit and scale the height accordingly;
+        // otherwise adjust the height to height limit and scale the width
+        // accordingly
+        if (($width / $height) > $ratioLimit) {
+            $newHeight = $height * ($widthLimit / $width);
+            return array ($widthLimit, $newHeight);
+        } else {
+            $newWidth = $width * ($heightLimit / $height);
+            return array ($newWidth, $heightLimit);
+        }
+    }
+
+    function addPost($connection, $title, $url, $text, $imgSize) {
         $currentDate = date("Y-m-d");
-        $query = "INSERT INTO `Posts` (`title`, `url`, `text`, `date`)
-                    VALUES ('$title', '$url', '$text', '$currentDate');";
+        list($width, $height) = $imgSize;
+        ChromePhp::log($width . " / " . $height);
+        $query = "INSERT INTO `Posts` (`title`, `url`, `text`, `date`,
+                `imgWidth`, `imgHeight`)
+            VALUES 
+                ('$title', '$url', '$text', '$currentDate', '$width',
+                '$height');";
 
         if(!mysqli_query($connection, $query)) {
             // return error code 500 when query failed

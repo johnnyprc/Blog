@@ -1,6 +1,7 @@
 /* -------------------- header page --------------------*/
-#header h1, .row img, .row .title {
+#header h1 {
     margin-left: 10%;
+    font-family: "Verdana";
 }
 
 #header {
@@ -15,19 +16,11 @@
     top: 0;
 }
 
-#buttons {
+.menuBtns {
     position: absolute;
-    right: 5%;
+    right: 10%;
     top: 25%;
 
-}
-
-#buttons #navBtn {
-    margin-right: 40px;
-}
-
-#logoutBtn {
-    margin-right: 40px; 
 }
 
 /* The Modal (background) */
@@ -66,25 +59,29 @@
 }
 
 /* -------------------- index page -----------------*/
-.row {
-    clear: both;
-    /*border: 3px solid black;*/
+.dateContainer {
+    margin-left: 10%;
+    margin-right: 10%;
+    height: 35px;
 }
 
-.row img, .row .title {
-    float: left;
+.dateText {
+    line-height: 40%;
+    font-family: "Verdana";
 }
 
-.row p {
+.beerImg {
+    margin-left: 16%;
+    float: left;  
+}
+
+.postContainer {
     margin-left: 30%;
-    width: 50%;
-    position: relative;
-
+    margin-right: 10%;
 }
 
-.row .date{
-    margin-left: 30%;
-    position: absolute;
+.postText {
+    font-family: "Verdana";
 }
 
 /* -------------------- submit page --------------------*/

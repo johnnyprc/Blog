@@ -1,60 +1,46 @@
 <html lang="en">
 <head>
-    <link rel="stylesheet" href="css/style.css">
     <title>Beer Blog</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.1.1.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <?php
+        // load up your config file
+        require_once("resources/config.php");
+        echo '<link rel="stylesheet" href="'.SCRIPT_ROOT.'/css/style.css">';
+    ?>
 </head>
-<?php    
-    // load up your config file
-    require_once("resources/config.php");
-     
+<?php
     require_once(TEMPLATES_PATH . "/header.php");
+
+    // Automatically show modal when login failed or user tried to submit
+    // post without logging in.
+    if(isset($_SESSION['err'])) {
+        echo '<div id="myModal" class="modal" style="display:block;">';
+    } else {
+        echo '<div id="myModal" class="modal">';
+    }
 ?>
+    <!-- Modal content -->
+    <div class="modal-content">
+        <form action="api/authUser.php" method="post">
+            <h3>Login to Blog to submit post</h3>
+            <?php 
+                if(isset($_SESSION['err'])) {
+                    echo '<p><font color="red">' .
+                        htmlspecialchars($_SESSION['err'], ENT_QUOTES) . '</font></p>';
+                    unset($_SESSION['err']);
+                }
+            ?>
+            Username:<br><input class="inputBoxModal" type="text" name="username"><br>
+            Password:<br><input class="inputBoxModal" type="password" name="pwd"><br>
+            <input class="submitButton" type="submit" name="login" value="Login">
+        </form>
+    </div>
+</div>
+
 <div id="posts"></div>
 
-<script>
-    var request;
-    request = $.ajax({
-        url: "api/getPost.php",
-        type: "get"  
-    })
-
-    request.done(function (response, textStatus, jqXHR){
-        var newPost;
-        // construct new post with same style and append to existing posts
-        for (var key in response) {
-            if (response.hasOwnProperty(key)) {
-                newPost = constructPost(
-                    response[key]['title'],
-                    response[key]['date'],
-                    response[key]['url'],
-                    response[key]['text'],
-                    response[key]['imgWidth'],
-                    response[key]['imgHeight']
-                );
-                $("#posts").append(newPost);
-            }
-        }
-    });
-
-    request.fail(function (jqXHR, textStatus, errorThrown){
-        console.error(
-            "textStatus: " + textStatus + ", errorThrown: " + errorThrown
-        );
-    });
-
-    function constructPost(title, date, url, text, imgWidth, imgHeight) {
-        var myString = 
-        `<div class="row">
-            <h3 class="title">${title}</h3>
-            <h3 class="date">${date}</h3>
-        </div>
-        <div class="row">
-            <img src="${url}" alt="Image fail to load" height="${imgHeight}"
-                width="${imgWidth}">
-            <p>${text}</p>
-        </div>`;
-        return myString;
-    }
-</script>
+<script type="text/javascript" src="js/index.js"></script>
 </body>
 </html>

@@ -1,12 +1,16 @@
 <html lang="en">
 <head>
-    <link rel="stylesheet" href="../css/style.css">
     <title>Submit a Post</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.1.1.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <?php
+        // load up your config file
+        require_once("../resources/config.php");
+        echo '<link rel="stylesheet" href="'.SCRIPT_ROOT.'/css/style.css">';
+    ?>
 </head>
-<?php 
-    // load up your config file
-    require_once("../resources/config.php");
-     
+<?php     
     require_once(TEMPLATES_PATH . "/header.php");
 
     // Prompt user to login before submitting post
@@ -31,46 +35,7 @@
     </form>
 </div>
 
-<script>
-// sending form data to database
-$('#postForm').submit(function(event) {
-    var request;
-
-    event.preventDefault();
-
-    $("#result").html('');
-
-    var serializedData = $(this).serialize();
-
-    request = $.ajax({
-        url: "../api/submitDB.php",
-        type: "post",
-        data: serializedData
-    });
-
-    request.done(function (response, textStatus, jqXHR){
-        if (response.formInvalid) {
-            // Fill corresponding label with error message, if any
-            $("#titleErr").html("<font color='red'>" + response.titleErr + "<font>");
-            $("#urlErr").html("<font color='red'>" + response.urlErr + "<font>");
-            $("#textErr").html("<font color='red'>" + response.textErr + "<font>");
-        } else {
-            // clear all input and error message when post is submitted
-            $('.errMsg').html('');
-            $(".inputBox").val('');
-            $("#postForm textarea").val('');
-            alert(response.message);
-        }
-    });
-
-    request.fail(function (jqXHR, textStatus, errorThrown){
-        // Log the error to the console
-        console.error(
-            "textStatus: " + textStatus + ", errorThrown: " + errorThrown
-        );
-    });
-});
-</script>
+<script type="text/javascript" src="../js/submitPost.js"></script>
 </body>
 </html>
 

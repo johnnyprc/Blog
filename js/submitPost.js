@@ -25,7 +25,9 @@ $('#postForm').submit(function(event) {
             $('.errMsg').html('');
             $(".inputBox").val('');
             $("#postForm textarea").val('');
-            alert(response.message);
+            $('#submitMsg')
+                .addClass("alert alert-success")
+                .append(response.message);
         }
     });
 

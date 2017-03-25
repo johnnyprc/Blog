@@ -24,7 +24,7 @@
     <!-- Modal content -->
     <div class="modal-content">
         <form action="api/authUser.php" method="post">
-            <h3>Login to Blog to submit post</h3>
+            <h2>Login to Blog to submit post</h2>
             <?php 
                 if(isset($_SESSION['err'])) {
                     echo '<p><font color="red">' .
@@ -32,9 +32,17 @@
                     unset($_SESSION['err']);
                 }
             ?>
-            Username:<br><input class="inputBoxModal" type="text" name="username"><br>
-            Password:<br><input class="inputBoxModal" type="password" name="pwd"><br>
-            <input class="submitButton" type="submit" name="login" value="Login">
+            <!-- Username:<br><input class="inputBoxModal" type="text" name="username"><br>
+            Password:<br><input class="inputBoxModal" type="password" name="pwd"><br> -->
+            <div class="form-group inputBoxModal">
+                <label for="username">Username:</label>
+                <input type="text" class="form-control" id="email" name="username">
+            </div>
+            <div class="form-group inputBoxModal">
+                <label for="pwd">Password:</label>
+                <input type="password" class="form-control" id="pwd" name="pwd">
+            </div>
+            <input class="btn btn-default submitButton" type="submit" name="login" value="Login">
         </form>
     </div>
 </div>

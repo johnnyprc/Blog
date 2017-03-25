@@ -43,19 +43,18 @@
     background-color: #fefefe;
     margin: auto;
     /*padding: 20px;*/
-    padding-left: 5%;
+    padding-left: 4%;
     border: 1px solid #888;
     width: 30%;
 }
 
 .inputBoxModal {
-    width: 45%;
-    margin-bottom: 20px;
+    width: 60%;
 }
 
 .submitButton {
     width: 100px;
-    margin-top: 20px;
+    margin-top: 10px;
 }
 
 /* -------------------- index page -----------------*/
@@ -86,7 +85,7 @@
 
 /* -------------------- submit page --------------------*/
 #submitContainer {
-    width: 800px;
+    width: 900px;
     margin: 50px 0px 0px 10%;
     /*clear: both;*/
 }
@@ -95,12 +94,17 @@
     margin-top: 15px;
 }
 
-.inputLabel {
-    display: block;
-}
-
 .inputBox {
     width: 50%;
     margin-bottom: 20px;
-    margin-right: 5px;
+    display: block;
+}
+
+.errMsg {
+    margin-right: 50%;
+    float: right;
+}
+
+#textErr {
+    margin-right: 0px;
 }

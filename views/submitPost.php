@@ -19,19 +19,20 @@
         header( "Location: ../index.php" ); 
     }
 ?>
+
+<!-- page title and post submission form -->
 <div id="submitContainer">
+    <div id="submitMsg"></div>
     <h2>Submit a post</h2><font color="red">All inputs are required</font>
     <form id="postForm">
-        <label class="inputLabel">Title:</label>
-            <input class="inputBox" type="text" name="inputTitle">
-            <label id="titleErr" class="errMsg"></label>
-        <label class="inputLabel">Image URL:</label>
-            <input class="inputBox" type="text" name="imageURL">
-            <label id="urlErr" class="errMsg"></label><br>
-        <label>Text:</label>
-            <label id="textErr" class="errMsg"></label>
-            <textarea name="postText" rows="20" cols="120"></textarea>
-        <input class="submitButton" type="submit" value="Submit">
+        <label>Beer Name:</label><span id="titleErr" class="errMsg"></span>
+            <input class="form-control inputBox" type="text" name="inputTitle">
+        <label>Beer Image URL:</label><span id="urlErr" class="errMsg"></span>
+            <input class="form-control inputBox" type="text" name="imageURL">
+        <label>Text:</label><span id="textErr" class="errMsg"></span>
+            <textarea class="form-control" name="postText" rows="20"
+                cols="120"></textarea>
+        <input class="btn btn-default submitButton" type="submit" value="Submit">
     </form>
 </div>
 

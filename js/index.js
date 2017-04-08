@@ -21,7 +21,7 @@ window.onclick = function(event) {
 
 var request;
 request = $.ajax({
-    url: "api/getPost.php",
+    url: "api/postsHandle.php",
     type: "get"  
 })
 

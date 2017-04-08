@@ -24,7 +24,7 @@
 }
 
 /* The Modal (background) */
-.modal {
+.modal-notbs {
     display: none; /* Hidden by default */
     position: fixed; /* Stay in place */
     z-index: 1; /* Sit on top */
@@ -39,7 +39,7 @@
 }
 
 /* Modal Content */
-.modal-content {
+.modal-content-notbs {
     background-color: #fefefe;
     margin: auto;
     /*padding: 20px;*/

@@ -24,14 +24,32 @@
     <h2>Manage post</h2>
     <ul class="list-group postList">
         <li class="list-group-item justify-content-between">
-            Cras justo odio
-            <a class="badge badge-default badge-pill" href="../index.php">
-                Delete</a>
+            <span>Cras justo odio</span>
+            <a class="badge" href="#" data-post-id="1" data-toggle="modal" data-target="#confirm-delete">Delete</a>
         </li>
     </ul>
 </div>
 
-<!-- <script type="text/javascript" src="../js/submitPost.js"></script> -->
+<!-- modal for confirming deletion -->
+<div class="modal fade" id="confirm-delete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title" id="myModalLabel">Confirm Delete</h4>
+            </div>
+            <div class="modal-body">
+                <p>Are you sure you want to delete this post?</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-danger btn-ok">Delete</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript" src="../js/managePost.js"></script>
 </body>
 </html>
 

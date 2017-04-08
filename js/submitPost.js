@@ -32,6 +32,9 @@ $('#postForm').submit(function(event) {
     });
 
     request.fail(function (jqXHR, textStatus, errorThrown){
+        $('#submitMsg')
+                .addClass("alert alert-danger")
+                .append(errorThrown);
         // Log the error to the console
         console.error(
             "textStatus: " + textStatus + ", errorThrown: " + errorThrown

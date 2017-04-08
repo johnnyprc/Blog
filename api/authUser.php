@@ -2,7 +2,7 @@
     require '../resources/config.php';
     session_start();
 
-    if(isset($_POST['login'])) {
+    if (isset($_POST['login'])) {
         checkLogin($connection, $_POST['username'], $_POST['pwd']);
     }
 

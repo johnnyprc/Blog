@@ -16,13 +16,13 @@
     // Automatically show modal when login failed or user tried to submit
     // post without logging in.
     if(isset($_SESSION['err'])) {
-        echo '<div id="myModal" class="modal" style="display:block;">';
+        echo '<div id="myModal" class="modal-notbs" style="display:block;">';
     } else {
-        echo '<div id="myModal" class="modal">';
+        echo '<div id="myModal" class="modal-notbs">';
     }
 ?>
     <!-- Modal content -->
-    <div class="modal-content">
+    <div class="modal-content-notbs">
         <form action="api/authUser.php" method="post">
             <h2>Login to Blog to submit post</h2>
             <?php 

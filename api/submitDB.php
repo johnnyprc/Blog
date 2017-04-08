@@ -82,7 +82,6 @@
     function addPost($connection, $title, $url, $text, $imgSize) {
         $currentDate = date("Y-m-d");
         list($width, $height) = $imgSize;
-        ChromePhp::log($width . " / " . $height);
         $query = "INSERT INTO `Posts` (`title`, `url`, `text`, `date`,
                 `imgWidth`, `imgHeight`)
             VALUES 

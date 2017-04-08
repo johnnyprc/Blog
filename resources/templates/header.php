@@ -9,6 +9,8 @@
             // submit post page. 
             if(basename($_SERVER['PHP_SELF']) == "index.php") { 
                 echo '<a class="btn btn-primary" href="'.SCRIPT_ROOT.
+                        '/views/managePost.php">Manage Post</a>';
+                echo '<a class="btn btn-primary" href="'.SCRIPT_ROOT.
                         '/views/submitPost.php">Submit Post</a>';
             } else {
                 echo '<a class="btn btn-primary" href="'.SCRIPT_ROOT.

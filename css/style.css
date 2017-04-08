@@ -86,7 +86,7 @@
 /* -------------------- submit page --------------------*/
 #submitContainer {
     width: 900px;
-    margin: 50px 0px 0px 10%;
+    margin: 0 0 0 10%;
     /*clear: both;*/
 }
 
@@ -107,4 +107,14 @@
 
 #textErr {
     margin-right: 0px;
+}
+
+/* ------------------- manage post ------------------*/
+.managePostContainer {
+    margin-left: 10%;
+    margin-right: 10%;
+}
+
+.postList {
+    margin-top: 20px;
 }

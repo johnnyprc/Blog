@@ -32,8 +32,6 @@
                     unset($_SESSION['err']);
                 }
             ?>
-            <!-- Username:<br><input class="inputBoxModal" type="text" name="username"><br>
-            Password:<br><input class="inputBoxModal" type="password" name="pwd"><br> -->
             <div class="form-group inputBoxModal">
                 <label for="username">Username:</label>
                 <input type="text" class="form-control" id="email" name="username">

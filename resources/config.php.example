@@ -6,7 +6,12 @@ define('DB_USERNAME', 'username');
 define('DB_PASSWORD', 'password');
 define('DB_DATABASE', 'name');
 
-$connection = NULL;
+// Connect to MySQL and select the database.
+$connection = mysqli_connect(DB_SERVER, DB_USERNAME, DB_PASSWORD);
+
+if (mysqli_connect_errno()) echo "Failed to connect to MySQL: " . mysqli_connect_error();
+
+$database = mysqli_select_db($connection, DB_DATABASE);
 
 date_default_timezone_set('America/Los_Angeles');
 

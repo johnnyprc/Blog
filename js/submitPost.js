@@ -1,20 +1,17 @@
 // sending form data to database
 $('#postForm').submit(function(event) {
-    var request;
 
     event.preventDefault();
 
-    $("#result").html('');
-
     var serializedData = $(this).serialize();
 
-    request = $.ajax({
+    var request = $.ajax({
         url: "../api/submitDB.php",
         type: "post",
         data: serializedData
     });
 
-    request.done(function (response, textStatus, jqXHR){
+    request.done(function(response, textStatus, jqXHR) {
         if (response.formInvalid) {
             // Fill corresponding label with error message, if any
             $("#titleErr").html("<font color='red'>" + response.titleErr + "<font>");
@@ -31,7 +28,7 @@ $('#postForm').submit(function(event) {
         }
     });
 
-    request.fail(function (jqXHR, textStatus, errorThrown){
+    request.fail(function(jqXHR, textStatus, errorThrown) {
         $('#submitMsg')
                 .addClass("alert alert-danger")
                 .append(errorThrown);

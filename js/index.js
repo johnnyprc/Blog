@@ -19,13 +19,16 @@ window.onclick = function(event) {
     }
 }
 
-var request;
-request = $.ajax({
+// ajax request to display all posts
+var request = $.ajax({
     url: "api/postsHandle.php",
-    type: "get"  
-})
+    type: "get",
+    data: {
+        'titleIdOnly' : "false"
+    }
+});
 
-request.done(function (response, textStatus, jqXHR){
+request.done(function(response, textStatus, jqXHR) {
     var newPost;
     
     // construct new post with same style and append to existing posts
@@ -44,7 +47,7 @@ request.done(function (response, textStatus, jqXHR){
     }
 });
 
-request.fail(function (jqXHR, textStatus, errorThrown){
+request.fail(function(jqXHR, textStatus, errorThrown) {
     console.error(
         "textStatus: " + textStatus + ", errorThrown: " + errorThrown
     );

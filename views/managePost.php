@@ -4,6 +4,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.1.1.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/2.3.0/mustache.js"></script>
     <?php
         // load up your config file
         require_once("../resources/config.php");
@@ -22,12 +23,7 @@
 
 <div class="managePostContainer">
     <h2>Manage post</h2>
-    <ul class="list-group postList">
-        <li class="list-group-item justify-content-between">
-            <span>Cras justo odio</span>
-            <a class="badge" href="#" data-post-id="1" data-toggle="modal" data-target="#confirm-delete">Delete</a>
-        </li>
-    </ul>
+    <ul class="list-group postList"></ul>
 </div>
 
 <!-- modal for confirming deletion -->

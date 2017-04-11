@@ -5,19 +5,27 @@
     header('Content-Type: application/json');
     
     if ($_SERVER['REQUEST_METHOD'] === 'GET') {
-        retrievePosts($connection);
+        retrievePosts($connection, $_GET['titleIdOnly']);
     } else {
         if (isset($_POST['delete'])) {
             $response = array();
             $response['status'] = 'success';
+            ChromePhp::log($_POST['postId']);
             echo(json_encode($response));
         }
     }
 
-    function retrievePosts($connection) {
-        // get every entry from the 'Posts' table
-        $query = "SELECT * FROM Posts ;";
+    function retrievePosts($connection, $titleIdOnly) {
+        $query = ''; 
         $posts = array();
+        
+        if ($titleIdOnly == "true") {
+            // get ID and title from the 'Posts' table
+            $query = "SELECT ID, title FROM Posts ;";
+        } else {
+            // get every entry from the 'Posts' table
+            $query = "SELECT * FROM Posts ;";
+        }
 
         if ($result = mysqli_query($connection, $query)) {
             // send results back as JSON

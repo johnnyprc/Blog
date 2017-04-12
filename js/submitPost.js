@@ -39,6 +39,17 @@ $('#postForm').submit(function(event) {
             "textStatus: " + textStatus + ", errorThrown: " + errorThrown
         );
     });
+
+    request.always(function() {
+        // redirect page to the submit message, stripe any previous 
+        // #element in the url
+        var url = window.location.href;
+        if (url.includes('#')) {
+            url = url.substring(0, url.indexOf('#'));
+        }
+        console.log("url: " + url);
+        window.location.href = url + '#submitMsg';
+    });
 });
 
 function clearPage() {

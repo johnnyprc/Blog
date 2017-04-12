@@ -24,7 +24,7 @@
     <!-- Modal content -->
     <div class="modal-content-notbs">
         <form action="api/authUser.php" method="post">
-            <h2>Login to Blog to submit post</h2>
+            <h2>Login</h2>
             <?php 
                 if(isset($_SESSION['err'])) {
                     echo '<p><font color="red">' .

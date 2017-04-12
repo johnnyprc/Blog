@@ -8,10 +8,7 @@
         retrievePosts($connection, $_GET['titleIdOnly']);
     } else {
         if (isset($_POST['delete'])) {
-            $response = array();
-            $response['status'] = 'success';
-            ChromePhp::log($_POST['postId']);
-            echo(json_encode($response));
+            deletePost($connection, $_POST["postId"]);
         }
     }
 
@@ -34,6 +31,27 @@
 
             // Free result set
             mysqli_free_result($result);
+        }
+
+        mysqli_close($connection);
+    }
+
+    function deletePost($connection, $Id) {
+        $query = "DELETE FROM Posts WHERE ID = '" . 
+                    mysqli_real_escape_string($connection, $Id) . "'";
+
+        if (mysqli_query($connection, $query)) {
+            // Successfully deleted post
+            echo(json_encode(array(
+                'message' => 'Successfully removed post!',
+            )));
+        } else {
+            // Deletion failed, return error message
+            $err = mysqli_error($connection);
+            header('HTTP/1.1 500 Database delete query failed');
+            echo(json_encode(array(
+                'message' => "ERROR! " . $err
+            )));
         }
 
         mysqli_close($connection);

@@ -22,6 +22,7 @@
 ?>
 
 <div class="managePostContainer">
+    <div id="deleteMsg"></div>
     <h2>Manage post</h2>
     <ul class="list-group postList"></ul>
 </div>

@@ -118,3 +118,7 @@
 .postList {
     margin-top: 20px;
 }
+
+.postList li:hover {
+    background-color: #e6f3ff;
+}

@@ -90,9 +90,13 @@
 
         if(!mysqli_query($connection, $query)) {
             // return error code 500 when query failed
-            header('HTTP/1.1 500 Database query failed');
-            die(json_encode(array('message' => 'ERROR', 'code' => 1337)));
+            $err = mysqli_error($connection);
+            header('HTTP/1.1 500 Database insert query failed');
+            echo(json_encode(array(
+                'message' => "ERROR! " . $err
+            )));
         } else {
+            // insertion successful
             echo(json_encode(array(
                 'message' => 'Successfully added post!',
                 'formInvalid' => FALSE

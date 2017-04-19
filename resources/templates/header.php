@@ -30,7 +30,7 @@
     </div>
     <?php
         if(isset($_SESSION['username'])) {
-            echo '<h4 id="nameTitle">' .
+            echo '<h4 id="nameTitle">Hello, ' .
                 htmlspecialchars($_SESSION['username'], ENT_QUOTES) . '</h4>';
         }
     ?>

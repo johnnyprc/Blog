@@ -64,7 +64,7 @@ function displayPage() {
         $.each(response, function(key, value) {
             listItem = buildListItem(value['ID'], value['title']);
             $('.postList').append(listItem);
-        })
+        });
     });  
 }
 
@@ -73,7 +73,7 @@ function buildListItem(Id, title) {
     var data = {
         Id : Id,
         title : title
-    }
+    };
 
     // display title and store post Id in data tag
     var template =

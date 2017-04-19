@@ -89,6 +89,14 @@
     font-family: "Verdana";
 }
 
+#outer {
+  width: 100%;
+  text-align: center;
+}
+
+#bottomNav {
+    display: inline-block;
+}
 /* -------------------- submit page --------------------*/
 #submitContainer {
     width: 900px;
@@ -126,5 +134,5 @@
 }
 
 .postList li:hover {
-    background-color: #e6f3ff;
+    backgroundnd-color: #e6f3ff;
 }

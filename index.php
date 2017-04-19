@@ -4,6 +4,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.1.1.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/2.3.0/mustache.js"></script>
     <?php
         // load up your config file
         require_once("resources/config.php");
@@ -46,6 +47,15 @@
 </div>
 
 <div id="posts"></div>
+
+<div id="outer">
+    <div id="bottomNav">
+        <nav aria-label="Posts page navigation">
+            <ul class="pagination pageList">
+            </ul>
+        </nav>
+    </div>
+</div>
 
 <script type="text/javascript" src="js/index.js"></script>
 </body>

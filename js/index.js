@@ -19,7 +19,7 @@ window.onclick = function(event) {
     }
 }
 
-var postsPerPage = 6;
+var postsPerPage = 5;
 
 // ajax request to display all posts
 var request = $.ajax({
@@ -31,23 +31,34 @@ var request = $.ajax({
 });
 
 request.done(function(response, textStatus, jqXHR) {
+    var value;
+    var currentPage = getURLParameter("page") || 1; // set current page to 1 
+                                                    // when null 
+    var numOfPosts = response.length;
+
     // make pagination elements
-    constructPagination(response.length, postsPerPage);
+    constructPagination(numOfPosts, postsPerPage, currentPage);
     
-    var newPost;
-    // construct new post with same style and append to existing posts
-    $.each(response, function(key, value) {
-        //get current page number
-        //generate posts based on page number
-        newPost = constructPost(
+    // get first and last post index for the current page
+    var start = (currentPage - 1) * postsPerPage;
+    var end = start + postsPerPage;
+    for (var i = start; i < end; i++) {
+        // exit the loop when the end is reached
+        if (i >= numOfPosts) {
+            break;
+        }
+        value = response[i];
+
+        // construct new post with same style and append to existing posts
+        $('#posts').append(constructPost(
             value['title'], 
             value['date'],
             value['url'],
             value['text'],
             value['imgWidth'],
-            value['imgHeight']);
-        $('#posts').append(newPost);
-    });
+            value['imgHeight']
+        ));
+    }
 });
 
 request.fail(function(jqXHR, textStatus, errorThrown) {
@@ -57,24 +68,33 @@ request.fail(function(jqXHR, textStatus, errorThrown) {
 });
 
 function constructPost(title, date, url, text, imgWidth, imgHeight) {
-    var myString = 
-    `<div class="panel panel-default dateContainer">
-       <div class="panel-body">
-            <p class="dateText"><strong>${date}</strong></p>
+    var data = {
+        title : title,
+        date : date,
+        url : url,
+        text : text,
+        imgWidth : imgWidth,
+        imgHeight : imgHeight
+    };
+
+    var template = 
+        `<div class="panel panel-default dateContainer">
+           <div class="panel-body">
+                <p class="dateText"><strong>{{date}}</strong></p>
+            </div>
         </div>
-    </div>
-    <img class="beerImg" src="${url}" alt="Image failed to load" 
-        height="${imgHeight}" width="${imgWidth}">
-    <div class="panel panel-default postContainer">
-        <div class="panel-heading postText">${title}</div>
-        <div class="panel-body postText">${text}</div>
-    </div>`;
-    return myString;
+        <img class="beerImg" src="{{url}}" alt="Image failed to load" 
+            height="{{imgHeight}}" width="{{imgWidth}}">
+        <div class="panel panel-default postContainer">
+            <div class="panel-heading postText">{{title}}</div>
+            <div class="panel-body postText">{{text}}</div>
+        </div>`;
+    return Mustache.render(template, data);
 }
 
-function constructPagination(postsNum, postsPerPage) {
+function constructPagination(numOfPosts, postsPerPage, currentPage) {
     // calculate total number of pages necessary
-    var totalPages = Math.ceil(postsNum / postsPerPage);
+    var totalPages = Math.ceil(numOfPosts / postsPerPage);
     var pageNumTemplate =
         `<li><a href="?page={{pageNum}}">{{pageNum}}</a></li>`;
     var navBtnTemplate = 
@@ -85,7 +105,6 @@ function constructPagination(postsNum, postsPerPage) {
         </li>`
 
     // build the previous label and assign previous page as its link
-    var currentPage = getURLParameter("page");
     var data = {
         pageNum : currentPage - 1,
         label : "Previous",

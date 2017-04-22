@@ -12,7 +12,7 @@ $('#postForm').submit(function(event) {
 
     request.done(function(response, textStatus, jqXHR) {
         // Clear inputs and messages when ajax request is successful
-        clearPage();
+        clearPage(response.formInvalid);
 
         if (response.formInvalid) {
             // Fill corresponding label with error message, if any
@@ -52,11 +52,16 @@ $('#postForm').submit(function(event) {
     });
 });
 
-function clearPage() {
-    // empty all input boxes and messages
+function clearPage(formInvalid=true) {
+    // empty all messages
     $('.errMsg').html('');
     $('#submitMsg').empty();
     $('#submitMsg').removeClass();
-    $('.inputBox').val('');
-    $('#postForm textarea').val('');
+
+    // only empty all inputs when submit is successful
+    if (!formInvalid) {
+        $("input[name='inputTitle']").val('');
+        $("input[name='imageURL']").val('');
+        $('#postForm textarea').val('');
+    }
 }

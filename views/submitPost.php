@@ -4,6 +4,8 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.1.1.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="../resources/jquery.are-you-sure/jquery.are-you-sure.js"></script>
+    <script src="../resources/jquery.are-you-sure/ays-beforeunload-shim.js"></script>
     <?php
         // load up your config file
         require_once("../resources/config.php");
@@ -32,7 +34,10 @@
         <label>Text:</label><span id="textErr" class="errMsg"></span>
             <textarea class="form-control" name="postText" rows="20"
                 cols="120"></textarea>
-        <input class="btn btn-default submitButton" type="submit" value="Submit">
+        <button class="btn btn-default submitButton" type="submit" form="postForm">
+            <span id="loadingIcon"></span>
+            <strong><span id="buttonText">Submit</span></strong>
+        </button>
     </form>
 </div>
 

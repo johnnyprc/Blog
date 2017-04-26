@@ -5,7 +5,7 @@ TODO:
 * ~~Delete post~~
 * ~~Seperate post into different pages~~
 * ~~Build home page HTML with Mustache~~
-* Add loading gif when inserting/deleting, only reset input fields with error when submitting post, confirm leaving page while editing post
+* ~~Add loading icon when inserting/deleting, only reset input fields with error when submitting post, confirm leaving page while editing post~~
 * Edit Post
 * Posts Summary
 * [security](http://stackoverflow.com/questions/1145132/how-safe-is-it-to-send-a-plain-text-password-using-ajax)

@@ -1,6 +1,14 @@
+// prompt user to confirm leaving the page without submitting
+$('#postForm').areYouSure();
+
 $('#postForm').submit(function(event) {
 
     event.preventDefault();
+
+    // change text, disable button and show spinning icon while submitting
+    $('#buttonText').text('Submitting...');
+    $('.submitButton').prop("disabled", true);
+    $('#loadingIcon').addClass('glyphicon glyphicon-refresh spinning');
 
     // get form data and make ajax request to send form data to database
     var serializedData = $(this).serialize();
@@ -41,6 +49,14 @@ $('#postForm').submit(function(event) {
     });
 
     request.always(function() {
+        // remove spinning icon and reset button 0.25 sec after submit finishes
+        // (otherwise button changes too fast when just checking empty input)
+        setTimeout(function() {
+            $('#buttonText').text('Submit');
+            $('.submitButton').prop("disabled", false);
+            $('#loadingIcon').removeClass();
+        }, 250);
+
         // redirect page to the submit message, stripe any previous 
         // #element in the url
         var url = window.location.href;

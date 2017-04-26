@@ -28,7 +28,7 @@
 </div>
 
 <!-- modal for confirming deletion -->
-<div class="modal fade" id="confirm-delete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="modal fade" id="confirm-delete" tabindex="-1" role="dialog" aria-labelledby="confirmDeleteModal" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -36,7 +36,7 @@
                 <h4 class="modal-title" id="myModalLabel">Confirm Delete</h4>
             </div>
             <div class="modal-body">
-                <p>Are you sure you want to delete this post?</p>
+                <p>Are you sure you want to delete <strong><i><span id="deleteTitle"></span></i></strong>?</p>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>

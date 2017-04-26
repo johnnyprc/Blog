@@ -42,6 +42,7 @@ $('#confirm-delete').on('click', '.btn-ok', function(e) {
 $('#confirm-delete').on('show.bs.modal', function(e) {
     var data = $(e.relatedTarget).data();
     $('.btn-ok', this).data('postId', data.postId);
+    $('#deleteTitle').text(data.postTitle);
 });
 
 function displayPage() {
@@ -79,8 +80,8 @@ function buildListItem(Id, title) {
     var template =
         `<li class="list-group-item list-group-item-action justify-content-between">
             <span>{{title}}</span>
-            <a class="badge" href="#" data-post-id="{{Id}}" data-toggle="modal"
-                data-target="#confirm-delete">Delete</a>
+            <a class="badge" href="#" data-post-id="{{Id}}" data-post-title="{{title}}"
+                data-toggle="modal" data-target="#confirm-delete">Delete</a>
         </li>`;
     return Mustache.render(template, data);
 }

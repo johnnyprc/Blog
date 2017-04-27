@@ -62,9 +62,7 @@ request.done(function(response, textStatus, jqXHR) {
 });
 
 request.fail(function(jqXHR, textStatus, errorThrown) {
-    console.error(
-        "textStatus: " + textStatus + ", errorThrown: " + errorThrown
-    );
+    console.warn(jqXHR.responseText)
 });
 
 function constructPost(title, date, url, text, imgWidth, imgHeight) {

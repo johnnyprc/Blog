@@ -82,7 +82,7 @@ function buildListItem(Id, title) {
             <span>{{title}}</span>
             <a class="badge" href="#" data-post-id="{{Id}}" data-post-title="{{title}}"
                 data-toggle="modal" data-target="#confirm-delete">Delete</a>
-            <a class="badge" data-post-id="{{Id}}">Edit</a>
+            <a class="badge" href="editPost.php?postId={{Id}}">Edit</a>
         </li>`;
     return Mustache.render(template, data);
 }

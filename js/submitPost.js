@@ -43,9 +43,7 @@ $('#postForm').submit(function(event) {
         $('#submitMsg')
             .addClass("alert alert-danger")
             .append(jqXHR.responseJSON.message);
-        console.error(
-            "textStatus: " + textStatus + ", errorThrown: " + errorThrown
-        );
+        console.error(jqXHR.responseText);
     });
 
     request.always(function() {
@@ -63,7 +61,6 @@ $('#postForm').submit(function(event) {
         if (url.includes('#')) {
             url = url.substring(0, url.indexOf('#'));
         }
-        console.log("url: " + url);
         window.location.href = url + '#submitMsg';
     });
 });

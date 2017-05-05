@@ -5,26 +5,45 @@
     header('Content-Type: application/json');
     
     if ($_SERVER['REQUEST_METHOD'] === 'GET') {
-        retrievePosts($connection, $_GET['titleIdOnly']);
+        if (isset($_GET['postId'])) {
+            // getting specific post for editing
+            retrievePosts($connection, $_GET['titleIdOnly'], $_GET["postId"]);
+        } else {
+            // getting posts to display at index or manage post page
+            retrievePosts($connection, $_GET['titleIdOnly']);
+        }
     } else {
         if (isset($_POST['delete'])) {
             deletePost($connection, $_POST["postId"]);
         }
     }
 
-    function retrievePosts($connection, $titleIdOnly) {
+    function retrievePosts($connection, $titleIdOnly, $postId=null) {
         $query = ''; 
         $posts = array();
         
-        if ($titleIdOnly == "true") {
-            // get ID and title from the 'Posts' table
-            $query = "SELECT ID, title FROM Posts ;";
+        if ($postId == null) {
+            if ($titleIdOnly == "true") {
+                // get ID and title from the 'Posts' table
+                $query = "SELECT `ID`, `title` FROM Posts ;";
+            } else {
+                // get every entry from the 'Posts' table
+                $query = "SELECT * FROM Posts ;";
+            }
         } else {
-            // get every entry from the 'Posts' table
-            $query = "SELECT * FROM Posts ;";
+            $query = "SELECT `title`, `url`, `text` FROM Posts WHERE ID = '" . 
+                        mysqli_real_escape_string($connection, $postId) . "';";
         }
 
         if ($result = mysqli_query($connection, $query)) {
+            // return error when query result is empty
+            if ($result->num_rows === 0) {
+                header('HTTP/1.1 500 Query result is empty');
+                die(json_encode(array(
+                    'message' => "Query result is empty"
+                )));
+            }
+
             // send results back as JSON
             $posts = $result->fetch_all(MYSQLI_ASSOC);
             echo(json_encode($posts));

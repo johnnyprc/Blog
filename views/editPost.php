@@ -24,7 +24,7 @@
 
 <!-- page title and post submission form -->
 <div id="submitContainer">
-    <div id="submitMsg"></div>
+    <div id="statusMsg"></div>
     <h2>Edit a post</h2>
     <form id="postForm">
         <label>Beer Name:</label><span id="titleErr" class="errMsg"></span>

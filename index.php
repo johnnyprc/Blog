@@ -15,34 +15,44 @@
     require_once(TEMPLATES_PATH . "/header.php");
 
     // Automatically show modal when login failed or user tried to submit
-    // post without logging in.
+    // or manage post without logging in.
     if(isset($_SESSION['err'])) {
-        echo '<div id="myModal" class="modal-notbs" style="display:block;">';
-    } else {
-        echo '<div id="myModal" class="modal-notbs">';
+        echo '<script type="text/javascript">
+                $(document).ready(function() {
+                    $("#loginModal").modal("show");
+                });
+              </script>';
     }
 ?>
-    <!-- Modal content -->
-    <div class="modal-content-notbs">
-        <form action="api/authUser.php" method="post">
-            <h2>Login</h2>
-            <?php 
-                if(isset($_SESSION['err'])) {
-                    echo '<p><font color="red">' .
-                        htmlspecialchars($_SESSION['err'], ENT_QUOTES) . '</font></p>';
-                    unset($_SESSION['err']);
-                }
-            ?>
-            <div class="form-group inputBoxModal">
-                <label for="username">Username:</label>
-                <input type="text" class="form-control" id="email" name="username">
+
+<!-- Modal -->
+<div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginModal" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                <form action="api/authUser.php" method="post">
+                    <h2>Login</h2>
+                    <?php
+                        // show error message and unset error to prevent error
+                        // displaying again when page is refreshed
+                        if(isset($_SESSION['err'])) {
+                            echo '<p id="loginErrMsg"><font color="red">' .
+                                htmlspecialchars($_SESSION['err'], ENT_QUOTES) . '</font></p>';
+                            unset($_SESSION['err']);
+                        }
+                    ?>
+                    <div class="form-group inputBoxModal">
+                        <label for="username">Username:</label>
+                        <input type="text" class="form-control" id="email" name="username">
+                    </div>
+                    <div class="form-group inputBoxModal">
+                        <label for="pwd">Password:</label>
+                        <input type="password" class="form-control" id="pwd" name="pwd">
+                    </div>
+                    <input class="btn btn-default submitButton" type="submit" name="login" value="Login">
+                </form>
             </div>
-            <div class="form-group inputBoxModal">
-                <label for="pwd">Password:</label>
-                <input type="password" class="form-control" id="pwd" name="pwd">
-            </div>
-            <input class="btn btn-default submitButton" type="submit" name="login" value="Login">
-        </form>
+        </div>
     </div>
 </div>
 

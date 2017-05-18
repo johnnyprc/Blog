@@ -23,8 +23,8 @@
             echo '<a class="btn btn-primary" href="'.SCRIPT_ROOT.
                     '/api/authUser.php?logout=true">Logout</a>';
         } else {
-            echo '<button class="btn btn-primary" id="loginBtn">
-                    Login</button>';
+            echo '<button class="btn btn-primary" id="loginBtn" 
+                data-toggle="modal" data-target="#loginModal">Login</button>';
         }
     ?>   
     </div>

@@ -1,25 +1,10 @@
 
-// Get the modal
-var modal = document.getElementById('myModal');
-
-// Get the button that opens the modal
-var btn = document.getElementById("loginBtn");
-
-// When the user clicks the button, open the modal 
-if (btn != null) {
-    btn.onclick = function() {
-        modal.style.display = "block";
-    }
-}
-
-// When the user clicks anywhere outside of the modal, close it
-window.onclick = function(event) {
-    if (event.target == modal) {
-        modal.style.display = "none";
-    }
-}
-
 var postsPerPage = 5;
+
+// prevent incorrect error message to show
+$('#loginBtn').click(function() {
+    $('#loginErrMsg').remove();
+});
 
 // ajax request to display all posts
 var request = $.ajax({

@@ -65,7 +65,6 @@
                     // resize image so that width and height is under limit, 
                     // if necessary
                     $newImgSize = resizeImage($size[0], $size[1]);
-                    // ChromePhp::log($newImgSize[0] . " / " . $newImgSize[1]);
                 }
             }
         }

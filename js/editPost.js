@@ -146,11 +146,4 @@ function clearPage(formInvalid=true) {
     $('.errMsg').html('');
     $('#statusMsg').empty();
     $('#statusMsg').removeClass();
-
-    // only empty all inputs when submit is successful
-    // if (!formInvalid) {
-    //     $("input[name='inputTitle']").val('');
-    //     $("input[name='imageURL']").val('');
-    //     $('#postForm textarea').val('');
-    // }
 }

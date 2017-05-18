@@ -34,7 +34,8 @@
         <label>Text:</label><span id="textErr" class="errMsg"></span>
             <textarea class="form-control" name="postText" rows="20"
                 cols="120"></textarea>
-        <button class="btn btn-default submitButton" type="submit" form="postForm">
+        <button class="btn btn-default submitButton" type="submit" 
+            form="postForm" title="Please make changes before submitting edit">
             <span id="loadingIcon"></span>
             <strong><span id="buttonText">Confirm</span></strong>
         </button>

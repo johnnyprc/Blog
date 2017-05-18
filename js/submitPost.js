@@ -4,7 +4,6 @@ $('#postForm').areYouSure();
 $('#postForm').submit(function(event) {
 
     event.preventDefault();
-
     // change text, disable button and show spinning icon while submitting
     $('#buttonText').text('Submitting...');
     $('.submitButton').prop("disabled", true);

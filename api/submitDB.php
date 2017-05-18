@@ -4,6 +4,29 @@
 
     header('Content-Type: application/json');
 
+    if(isset($_POST['edit'])) {
+        $formJson = json_decode($_POST['json'], true);
+
+        // assign empty string to parameters when corresponding
+        // input is not set
+        $title = isset($formJson["title"]) ? $formJson["title"] : "";
+        $url = isset($formJson["url"]) ? $formJson["url"] : "";
+        $text = isset($formJson["text"]) ? $formJson["text"] : "";
+        
+        $imgSize = processInput($title, $url, $text,
+                                isset($formJson["title"]),
+                                isset($formJson["url"]),
+                                isset($formJson["text"]));
+
+        if ($imgSize != "") {
+            list($width, $height) = $imgSize;
+            $formJson["imgWidth"] = $width;
+            $formJson["imgHeight"] = $height;
+        }
+
+        updatePost($connection, $_POST['postId'], $formJson);
+    }
+
     // validate input and get image width and height before inserting
     // into database
     $imgSize = processInput(
@@ -15,32 +38,43 @@
     $text = mysqli_real_escape_string($connection, $_POST['postText']);
     addPost($connection, $title, $url, $text, $imgSize);
 
-    // Validate that all inputs are not empty and image URL is valid
-    function processInput($title, $url, $text) {
+    // Validate that all inputs are not empty and image URL is valid, 
+    // while editing only checks image url when the url is changed
+    function processInput($title, $url, $text, $titleChange = true,
+                                $urlChange = true, $textChange = true) {
         $titleErr = $urlErr = $textErr = "";
-        $newImgSize;
+        $newImgSize = "";
 
-        if (empty($title)) {
-            $titleErr = "A title is required";
-        }
-
-        if (empty($url)) {
-            $urlErr = "An image URL is required";
-        } else {
-            // checking for valid image URL, ignore warning so that 
-            // it wouldn't mess up json response
-            if (!$size = @getimagesize($url)) {
-                $urlErr = "Image URL is invalid";
-            } else {
-                // resize image so that width and height is under limit, 
-                // if necessary
-                $newImgSize = resizeImage($size[0], $size[1]);
-                // ChromePhp::log($newImgSize[0] . " / " . $newImgSize[1]);
+        // only check input title when it has been changed
+        if ($titleChange) {
+            if (empty($title)) {
+                $titleErr = "A title is required";
             }
         }
 
-        if (empty($text)) {
-            $textErr = "required";
+        // only check url when the url is changed
+        if ($urlChange) {
+            if (empty($url)) {
+                $urlErr = "An image URL is required";
+            } else {
+                // checking for valid image URL, ignore warning so that 
+                // it wouldn't mess up json response
+                if (!$size = @getimagesize($url)) {
+                    $urlErr = "Image URL is invalid";
+                } else {
+                    // resize image so that width and height is under limit, 
+                    // if necessary
+                    $newImgSize = resizeImage($size[0], $size[1]);
+                    // ChromePhp::log($newImgSize[0] . " / " . $newImgSize[1]);
+                }
+            }
+        }
+
+        // only check text when the text is changed
+        if ($textChange) {
+            if (empty($text)) {
+                $textErr = "required";
+            }
         }
 
         // If there are any invalid input return immediately
@@ -99,6 +133,35 @@
             // insertion successful
             echo(json_encode(array(
                 'message' => 'Successfully added post!',
+                'formInvalid' => FALSE
+            )));
+        }
+
+        mysqli_close($connection);
+    }
+
+    function updatePost($connection, $postId, $formJson) {
+        // build query with json key/pair value
+        $query = "UPDATE `Posts` SET ";
+        foreach($formJson as $key => $value){
+            $query .= $key . "='" . 
+                mysqli_real_escape_string($connection, $value) . "',";
+        }
+        // trim the last comma from the query
+        $query = rtrim($query,", ");
+        $query .= " WHERE ID=" . $postId;
+
+        if(!mysqli_query($connection, $query)) {
+            // return error code 500 when query failed
+            $err = mysqli_error($connection);
+            header('HTTP/1.1 500 Database update query failed');
+            die(json_encode(array(
+                'message' => "ERROR! " . $err
+            )));
+        } else {
+            // update successful
+            die(json_encode(array(
+                'message' => 'Successfully updated post!',
                 'formInvalid' => FALSE
             )));
         }
